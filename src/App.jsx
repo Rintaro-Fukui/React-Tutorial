@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { fetchImages } from "./api";
+
 function Header() {
     return (
         <header className="hero is-dark is-bold">
@@ -45,7 +48,12 @@ function Gallery(props) {
 }
 
 function Main() {
-    const urls = null;
+    const [urls, setUrls] = useState(null);
+    useEffect( () => {
+        fetchImages("shiba").then((urls) => {
+            setUrls(urls);
+        });
+    }, []);
     return (
         <main>
             <section className="section">
